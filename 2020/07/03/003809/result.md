@@ -1,0 +1,473 @@
+# Benchmark result
+
+* Pull request commit: [`5a93547e42ce6e20d1006277eb1a7bd444d56db6`](https://github.com/tkf/ThreadsX.jl/commit/5a93547e42ce6e20d1006277eb1a7bd444d56db6)
+* Pull request: <https://github.com/tkf/ThreadsX.jl/pull/122> (Update */Manifest.toml)
+
+# Judge result
+# Benchmark Report for */home/runner/work/ThreadsX.jl/ThreadsX.jl*
+
+## Job Properties
+* Time of benchmarks:
+    - Target: 3 Jul 2020 - 00:31
+    - Baseline: 3 Jul 2020 - 00:37
+* Package commits:
+    - Target: a0819d
+    - Baseline: a8d6d3
+* Julia commits:
+    - Target: 44fa15
+    - Baseline: 44fa15
+* Julia command flags:
+    - Target: None
+    - Baseline: None
+* Environment variables:
+    - Target: `OMP_NUM_THREADS => 1` `JULIA_NUM_THREADS => 2`
+    - Baseline: `OMP_NUM_THREADS => 1` `JULIA_NUM_THREADS => 2`
+
+## Results
+A ratio greater than `1.0` denotes a possible regression (marked with :x:), while a ratio less
+than `1.0` denotes a possible improvement (marked with :white_check_mark:). Only significant results - results
+that indicate possible regressions or improvements - are shown below (thus, an empty table means that all
+benchmark results remained invariant between builds).
+
+| ID                                                                 | time ratio                   | memory ratio                 |
+|--------------------------------------------------------------------|------------------------------|------------------------------|
+| `["findfirst", "0%", "tx"]`                                        |                1.16 (5%) :x: |                   1.00 (1%)  |
+| `["findfirst", "0%", "tx-noterm"]`                                 |                1.13 (5%) :x: |                   1.00 (1%)  |
+| `["findfirst", "10%", "tx-noterm"]`                                |                   0.99 (5%)  |                1.68 (1%) :x: |
+| `["findfirst", "20%", "tx-noterm"]`                                |                   0.95 (5%)  |                1.08 (1%) :x: |
+| `["findfirst", "30%", "tx-noterm"]`                                |                1.05 (5%) :x: |                   1.00 (1%)  |
+| `["findfirst", "40%", "tx-noterm"]`                                |                1.16 (5%) :x: |                   1.00 (1%)  |
+| `["findfirst", "50%", "tx-noterm"]`                                |                   1.00 (5%)  | 0.77 (1%) :white_check_mark: |
+| `["foreach_seq_double", "cartesian", "man"]`                       | 0.89 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => :ivdep"]`     | 0.94 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => false"]`      | 0.93 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => true"]`       | 0.91 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["foreach_seq_sum_many", ":nvecs => 8", "man"]`                   |                1.33 (5%) :x: |                   1.00 (1%)  |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => :ivdep"]` |                1.33 (5%) :x: |                   1.00 (1%)  |
+| `["sort", "F64 (wide)", "ThreadsX.MergeSort"]`                     | 0.91 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["sort", "F64 (wide)", "ThreadsX.QuickSort"]`                     | 0.92 (5%) :white_check_mark: |                   1.00 (1%)  |
+| `["sort", "sorted", "ThreadsX.QuickSort"]`                         |                1.07 (5%) :x: |                   1.00 (1%)  |
+
+## Benchmark Group List
+Here's a list of all the benchmark groups executed by this job:
+
+- `["findfirst", "0%"]`
+- `["findfirst", "10%"]`
+- `["findfirst", "20%"]`
+- `["findfirst", "30%"]`
+- `["findfirst", "40%"]`
+- `["findfirst", "50%"]`
+- `["foreach", "base"]`
+- `["foreach", "broadcast"]`
+- `["foreach", "tx"]`
+- `["foreach_seq", "base"]`
+- `["foreach_seq", "tx"]`
+- `["foreach_seq_double", "cartesian"]`
+- `["foreach_seq_double", "cartesian", "tx"]`
+- `["foreach_seq_double", "linear"]`
+- `["foreach_seq_double", "linear", "tx"]`
+- `["foreach_seq_sum_many", ":nvecs => 8"]`
+- `["foreach_seq_sum_many", ":nvecs => 8", "tx"]`
+- `["sort", "F64 (narrow)"]`
+- `["sort", "F64 (wide)"]`
+- `["sort", "I64 (narrow)"]`
+- `["sort", "I64 (wide)"]`
+- `["sort", "reversed"]`
+- `["sort", "sorted"]`
+- `["unique", "rand(1:10, 1000000)"]`
+- `["unique", "rand(1:1000, 1000000)"]`
+
+## Julia versioninfo
+
+### Target
+```
+Julia Version 1.4.2
+Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Platform Info:
+  OS: Linux (x86_64-pc-linux-gnu)
+      Ubuntu 18.04.4 LTS
+  uname: Linux 5.3.0-1031-azure #32~18.04.1-Ubuntu SMP Mon Jun 22 15:27:23 UTC 2020 x86_64 x86_64
+  CPU: Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz: 
+              speed         user         nice          sys         idle          irq
+       #1  2294 MHz      54745 s          0 s       2830 s      31546 s          0 s
+       #2  2294 MHz      55925 s          0 s       2843 s      30345 s          0 s
+       
+  Memory: 6.764884948730469 GB (2090.6640625 MB free)
+  Uptime: 910.0 sec
+  Load Avg:  1.3125  1.34765625  0.8974609375
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-8.0.1 (ORCJIT, broadwell)
+```
+
+### Baseline
+```
+Julia Version 1.4.2
+Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Platform Info:
+  OS: Linux (x86_64-pc-linux-gnu)
+      Ubuntu 18.04.4 LTS
+  uname: Linux 5.3.0-1031-azure #32~18.04.1-Ubuntu SMP Mon Jun 22 15:27:23 UTC 2020 x86_64 x86_64
+  CPU: Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz: 
+              speed         user         nice          sys         idle          irq
+       #1  2294 MHz      83009 s          0 s       3787 s      38654 s          0 s
+       #2  2294 MHz      75455 s          0 s       3425 s      46539 s          0 s
+       
+  Memory: 6.764884948730469 GB (2310.546875 MB free)
+  Uptime: 1275.0 sec
+  Load Avg:  1.37646484375  1.36767578125  1.05517578125
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-8.0.1 (ORCJIT, broadwell)
+```
+
+---
+# Target result
+# Benchmark Report for */home/runner/work/ThreadsX.jl/ThreadsX.jl*
+
+## Job Properties
+* Time of benchmark: 3 Jul 2020 - 0:31
+* Package commit: a0819d
+* Julia commit: 44fa15
+* Julia command flags: None
+* Environment variables: `OMP_NUM_THREADS => 1` `JULIA_NUM_THREADS => 2`
+
+## Results
+Below is a table of this job's results, obtained by running the benchmarks.
+The values listed in the `ID` column have the structure `[parent_group, child_group, ..., key]`, and can be used to
+index into the BaseBenchmarks suite to retrieve the corresponding benchmarks.
+The percentages accompanying time and memory values in the below table are noise tolerances. The "true"
+time/memory value for a given benchmark is expected to fall within this percentage of the reported value.
+An empty cell means that the value was zero.
+
+| ID                                                                 | time            | GC time   | memory          | allocations |
+|--------------------------------------------------------------------|----------------:|----------:|----------------:|------------:|
+| `["findfirst", "0%", "base"]`                                      |   2.800 ns (5%) |           |                 |             |
+| `["findfirst", "0%", "tx"]`                                        |  26.701 μs (5%) |           |  11.97 KiB (1%) |         219 |
+| `["findfirst", "0%", "tx-noterm"]`                                 |  20.401 μs (5%) |           |  12.02 KiB (1%) |         221 |
+| `["findfirst", "0%", "tx-seq"]`                                    | 213.221 ns (5%) |           |  560 bytes (1%) |          15 |
+| `["findfirst", "10%", "base"]`                                     |  59.400 μs (5%) |           |                 |             |
+| `["findfirst", "10%", "tx"]`                                       |  68.401 μs (5%) |           |  14.44 KiB (1%) |         271 |
+| `["findfirst", "10%", "tx-noterm"]`                                | 178.402 μs (5%) |           |  39.88 KiB (1%) |         735 |
+| `["findfirst", "10%", "tx-seq"]`                                   |  59.601 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "20%", "base"]`                                     | 117.802 μs (5%) |           |                 |             |
+| `["findfirst", "20%", "tx"]`                                       | 123.102 μs (5%) |           |  21.42 KiB (1%) |         399 |
+| `["findfirst", "20%", "tx-noterm"]`                                | 172.402 μs (5%) |           |  30.77 KiB (1%) |         573 |
+| `["findfirst", "20%", "tx-seq"]`                                   | 118.001 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "30%", "base"]`                                     | 176.302 μs (5%) |           |                 |             |
+| `["findfirst", "30%", "tx"]`                                       | 173.602 μs (5%) |           |  28.34 KiB (1%) |         525 |
+| `["findfirst", "30%", "tx-noterm"]`                                | 199.703 μs (5%) |           |  28.41 KiB (1%) |         528 |
+| `["findfirst", "30%", "tx-seq"]`                                   | 176.402 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "40%", "base"]`                                     | 234.703 μs (5%) |           |                 |             |
+| `["findfirst", "40%", "tx"]`                                       | 228.303 μs (5%) |           |  35.39 KiB (1%) |         656 |
+| `["findfirst", "40%", "tx-noterm"]`                                | 235.402 μs (5%) |           |  35.42 KiB (1%) |         657 |
+| `["findfirst", "40%", "tx-seq"]`                                   | 234.803 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "50%", "base"]`                                     | 293.104 μs (5%) |           |                 |             |
+| `["findfirst", "50%", "tx"]`                                       | 265.603 μs (5%) |           |  37.84 KiB (1%) |         707 |
+| `["findfirst", "50%", "tx-noterm"]`                                | 299.803 μs (5%) |           |  37.94 KiB (1%) |         712 |
+| `["findfirst", "50%", "tx-seq"]`                                   | 293.204 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["foreach", "base", "A .= B .+ B'"]`                              | 424.550 ms (5%) | 37.163 ms | 305.18 MiB (1%) |    16000002 |
+| `["foreach", "base", "A .= B .+ C"]`                               | 224.774 ms (5%) | 37.738 ms | 305.18 MiB (1%) |    16000001 |
+| `["foreach", "broadcast", "A .= B .+ B'"]`                         |  15.547 ms (5%) |           |                 |             |
+| `["foreach", "broadcast", "A .= B .+ C"]`                          |   9.382 ms (5%) |           |                 |             |
+| `["foreach", "tx", "A .= B .+ B'"]`                                |   7.742 ms (5%) |           |  25.94 KiB (1%) |         360 |
+| `["foreach", "tx", "A .= B .+ C"]`                                 |   5.033 ms (5%) |           |  12.75 KiB (1%) |         124 |
+| `["foreach_seq", "base", "Matrix"]`                                | 560.805 μs (5%) |           |                 |             |
+| `["foreach_seq", "base", "Transpose"]`                             |   1.886 ms (5%) |           |                 |             |
+| `["foreach_seq", "base", "Vector"]`                                | 560.705 μs (5%) |           |                 |             |
+| `["foreach_seq", "tx", "Matrix"]`                                  | 564.206 μs (5%) |           |                 |             |
+| `["foreach_seq", "tx", "Transpose"]`                               | 876.609 μs (5%) |           |   16 bytes (1%) |           1 |
+| `["foreach_seq", "tx", "Vector"]`                                  | 560.706 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "man"]`                       |  20.300 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => :ivdep"]`     |  20.300 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => false"]`      |  20.200 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => true"]`       |  20.300 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "man"]`                          | 101.699 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => :ivdep"]`        | 104.182 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => false"]`         | 103.859 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => true"]`          | 101.951 ns (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "man"]`                   |   2.122 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => :ivdep"]` |   2.122 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => false"]`  |   2.600 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => true"]`   |   2.589 μs (5%) |           |                 |             |
+| `["sort", "F64 (narrow)", "Base"]`                                 |   1.988 ms (5%) |           |                 |             |
+| `["sort", "F64 (narrow)", "ThreadsX.MergeSort"]`                   |   2.526 ms (5%) |           |   1.19 MiB (1%) |         535 |
+| `["sort", "F64 (narrow)", "ThreadsX.QuickSort"]`                   |   1.493 ms (5%) |           | 965.11 KiB (1%) |        1226 |
+| `["sort", "F64 (narrow)", "ThreadsX.StableQuickSort"]`             |   1.516 ms (5%) |           |   1.02 MiB (1%) |        1245 |
+| `["sort", "F64 (wide)", "Base"]`                                   |   5.184 ms (5%) |           |                 |             |
+| `["sort", "F64 (wide)", "ThreadsX.MergeSort"]`                     |   4.553 ms (5%) |           |   1.19 MiB (1%) |         563 |
+| `["sort", "F64 (wide)", "ThreadsX.QuickSort"]`                     |   4.585 ms (5%) |           |   1.01 MiB (1%) |        2143 |
+| `["sort", "F64 (wide)", "ThreadsX.StableQuickSort"]`               |   5.540 ms (5%) |           |   1.39 MiB (1%) |        2196 |
+| `["sort", "I64 (narrow)", "Base"]`                                 | 129.102 μs (5%) |           |  160 bytes (1%) |           1 |
+| `["sort", "I64 (narrow)", "ThreadsX.MergeSort"]`                   | 131.301 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (narrow)", "ThreadsX.QuickSort"]`                   | 131.301 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (narrow)", "ThreadsX.StableQuickSort"]`             | 131.002 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (wide)", "Base"]`                                   |   5.111 ms (5%) |           |                 |             |
+| `["sort", "I64 (wide)", "ThreadsX.MergeSort"]`                     |   3.882 ms (5%) |           |   1.19 MiB (1%) |         554 |
+| `["sort", "I64 (wide)", "ThreadsX.QuickSort"]`                     |   3.731 ms (5%) |           |   1.01 MiB (1%) |        2236 |
+| `["sort", "I64 (wide)", "ThreadsX.StableQuickSort"]`               |   4.553 ms (5%) |           |   1.40 MiB (1%) |        2270 |
+| `["sort", "reversed", "Base"]`                                     | 643.507 μs (5%) |           |                 |             |
+| `["sort", "reversed", "ThreadsX.MergeSort"]`                       |   1.114 ms (5%) |           |   1.18 MiB (1%) |         435 |
+| `["sort", "reversed", "ThreadsX.QuickSort"]`                       |   1.045 ms (5%) |           | 998.77 KiB (1%) |        1872 |
+| `["sort", "reversed", "ThreadsX.StableQuickSort"]`                 |   1.487 ms (5%) |           |   1.36 MiB (1%) |        1904 |
+| `["sort", "sorted", "Base"]`                                       | 610.306 μs (5%) |           |                 |             |
+| `["sort", "sorted", "ThreadsX.MergeSort"]`                         | 811.308 μs (5%) |           |   1.18 MiB (1%) |         431 |
+| `["sort", "sorted", "ThreadsX.QuickSort"]`                         |   1.124 ms (5%) |           | 998.75 KiB (1%) |        1871 |
+| `["sort", "sorted", "ThreadsX.StableQuickSort"]`                   |   1.158 ms (5%) |           |   1.36 MiB (1%) |        1904 |
+| `["unique", "rand(1:10, 1000000)", "base"]`                        |   8.316 ms (5%) |           |  832 bytes (1%) |           8 |
+| `["unique", "rand(1:10, 1000000)", "tx"]`                          |   4.458 ms (5%) |           |  50.98 KiB (1%) |         882 |
+| `["unique", "rand(1:1000, 1000000)", "base"]`                      |   7.767 ms (5%) |           |  65.95 KiB (1%) |          27 |
+| `["unique", "rand(1:1000, 1000000)", "tx"]`                        |   4.749 ms (5%) |           |   1.07 MiB (1%) |        1186 |
+
+## Benchmark Group List
+Here's a list of all the benchmark groups executed by this job:
+
+- `["findfirst", "0%"]`
+- `["findfirst", "10%"]`
+- `["findfirst", "20%"]`
+- `["findfirst", "30%"]`
+- `["findfirst", "40%"]`
+- `["findfirst", "50%"]`
+- `["foreach", "base"]`
+- `["foreach", "broadcast"]`
+- `["foreach", "tx"]`
+- `["foreach_seq", "base"]`
+- `["foreach_seq", "tx"]`
+- `["foreach_seq_double", "cartesian"]`
+- `["foreach_seq_double", "cartesian", "tx"]`
+- `["foreach_seq_double", "linear"]`
+- `["foreach_seq_double", "linear", "tx"]`
+- `["foreach_seq_sum_many", ":nvecs => 8"]`
+- `["foreach_seq_sum_many", ":nvecs => 8", "tx"]`
+- `["sort", "F64 (narrow)"]`
+- `["sort", "F64 (wide)"]`
+- `["sort", "I64 (narrow)"]`
+- `["sort", "I64 (wide)"]`
+- `["sort", "reversed"]`
+- `["sort", "sorted"]`
+- `["unique", "rand(1:10, 1000000)"]`
+- `["unique", "rand(1:1000, 1000000)"]`
+
+## Julia versioninfo
+```
+Julia Version 1.4.2
+Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Platform Info:
+  OS: Linux (x86_64-pc-linux-gnu)
+      Ubuntu 18.04.4 LTS
+  uname: Linux 5.3.0-1031-azure #32~18.04.1-Ubuntu SMP Mon Jun 22 15:27:23 UTC 2020 x86_64 x86_64
+  CPU: Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz: 
+              speed         user         nice          sys         idle          irq
+       #1  2294 MHz      54745 s          0 s       2830 s      31546 s          0 s
+       #2  2294 MHz      55925 s          0 s       2843 s      30345 s          0 s
+       
+  Memory: 6.764884948730469 GB (2090.6640625 MB free)
+  Uptime: 910.0 sec
+  Load Avg:  1.3125  1.34765625  0.8974609375
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-8.0.1 (ORCJIT, broadwell)
+```
+
+---
+# Baseline result
+# Benchmark Report for */home/runner/work/ThreadsX.jl/ThreadsX.jl*
+
+## Job Properties
+* Time of benchmark: 3 Jul 2020 - 0:37
+* Package commit: a8d6d3
+* Julia commit: 44fa15
+* Julia command flags: None
+* Environment variables: `OMP_NUM_THREADS => 1` `JULIA_NUM_THREADS => 2`
+
+## Results
+Below is a table of this job's results, obtained by running the benchmarks.
+The values listed in the `ID` column have the structure `[parent_group, child_group, ..., key]`, and can be used to
+index into the BaseBenchmarks suite to retrieve the corresponding benchmarks.
+The percentages accompanying time and memory values in the below table are noise tolerances. The "true"
+time/memory value for a given benchmark is expected to fall within this percentage of the reported value.
+An empty cell means that the value was zero.
+
+| ID                                                                 | time            | GC time   | memory          | allocations |
+|--------------------------------------------------------------------|----------------:|----------:|----------------:|------------:|
+| `["findfirst", "0%", "base"]`                                      |   2.800 ns (5%) |           |                 |             |
+| `["findfirst", "0%", "tx"]`                                        |  23.100 μs (5%) |           |  11.97 KiB (1%) |         219 |
+| `["findfirst", "0%", "tx-noterm"]`                                 |  18.101 μs (5%) |           |  12.02 KiB (1%) |         221 |
+| `["findfirst", "0%", "tx-seq"]`                                    | 204.527 ns (5%) |           |  560 bytes (1%) |          15 |
+| `["findfirst", "10%", "base"]`                                     |  59.101 μs (5%) |           |                 |             |
+| `["findfirst", "10%", "tx"]`                                       |  69.701 μs (5%) |           |  14.44 KiB (1%) |         271 |
+| `["findfirst", "10%", "tx-noterm"]`                                | 181.104 μs (5%) |           |  23.77 KiB (1%) |         443 |
+| `["findfirst", "10%", "tx-seq"]`                                   |  59.601 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "20%", "base"]`                                     | 117.902 μs (5%) |           |                 |             |
+| `["findfirst", "20%", "tx"]`                                       | 122.903 μs (5%) |           |  21.42 KiB (1%) |         399 |
+| `["findfirst", "20%", "tx-noterm"]`                                | 181.404 μs (5%) |           |  28.41 KiB (1%) |         528 |
+| `["findfirst", "20%", "tx-seq"]`                                   | 118.002 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "30%", "base"]`                                     | 176.105 μs (5%) |           |                 |             |
+| `["findfirst", "30%", "tx"]`                                       | 169.604 μs (5%) |           |  28.34 KiB (1%) |         525 |
+| `["findfirst", "30%", "tx-noterm"]`                                | 189.805 μs (5%) |           |  28.41 KiB (1%) |         528 |
+| `["findfirst", "30%", "tx-seq"]`                                   | 176.604 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "40%", "base"]`                                     | 234.705 μs (5%) |           |                 |             |
+| `["findfirst", "40%", "tx"]`                                       | 232.905 μs (5%) |           |  35.39 KiB (1%) |         656 |
+| `["findfirst", "40%", "tx-noterm"]`                                | 203.504 μs (5%) |           |  35.42 KiB (1%) |         657 |
+| `["findfirst", "40%", "tx-seq"]`                                   | 234.506 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["findfirst", "50%", "base"]`                                     | 293.107 μs (5%) |           |                 |             |
+| `["findfirst", "50%", "tx"]`                                       | 263.706 μs (5%) |           |  37.84 KiB (1%) |         707 |
+| `["findfirst", "50%", "tx-noterm"]`                                | 298.607 μs (5%) |           |  49.48 KiB (1%) |         923 |
+| `["findfirst", "50%", "tx-seq"]`                                   | 293.207 μs (5%) |           |  576 bytes (1%) |          16 |
+| `["foreach", "base", "A .= B .+ B'"]`                              | 429.434 ms (5%) | 32.199 ms | 305.18 MiB (1%) |    16000002 |
+| `["foreach", "base", "A .= B .+ C"]`                               | 223.915 ms (5%) | 34.107 ms | 305.18 MiB (1%) |    16000001 |
+| `["foreach", "broadcast", "A .= B .+ B'"]`                         |  15.811 ms (5%) |           |                 |             |
+| `["foreach", "broadcast", "A .= B .+ C"]`                          |   9.259 ms (5%) |           |                 |             |
+| `["foreach", "tx", "A .= B .+ B'"]`                                |   7.698 ms (5%) |           |  25.94 KiB (1%) |         360 |
+| `["foreach", "tx", "A .= B .+ C"]`                                 |   4.982 ms (5%) |           |  12.75 KiB (1%) |         124 |
+| `["foreach_seq", "base", "Matrix"]`                                | 561.109 μs (5%) |           |                 |             |
+| `["foreach_seq", "base", "Transpose"]`                             |   1.905 ms (5%) |           |                 |             |
+| `["foreach_seq", "base", "Vector"]`                                | 561.308 μs (5%) |           |                 |             |
+| `["foreach_seq", "tx", "Matrix"]`                                  | 564.509 μs (5%) |           |                 |             |
+| `["foreach_seq", "tx", "Transpose"]`                               | 878.013 μs (5%) |           |   16 bytes (1%) |           1 |
+| `["foreach_seq", "tx", "Vector"]`                                  | 561.109 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "man"]`                       |  22.800 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => :ivdep"]`     |  21.500 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => false"]`      |  21.700 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "cartesian", "tx", ":simd => true"]`       |  22.200 μs (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "man"]`                          | 101.700 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => :ivdep"]`        | 100.000 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => false"]`         | 100.000 ns (5%) |           |                 |             |
+| `["foreach_seq_double", "linear", "tx", ":simd => true"]`          | 100.000 ns (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "man"]`                   |   1.600 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => :ivdep"]` |   1.600 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => false"]`  |   2.500 μs (5%) |           |                 |             |
+| `["foreach_seq_sum_many", ":nvecs => 8", "tx", ":simd => true"]`   |   2.500 μs (5%) |           |                 |             |
+| `["sort", "F64 (narrow)", "Base"]`                                 |   2.032 ms (5%) |           |                 |             |
+| `["sort", "F64 (narrow)", "ThreadsX.MergeSort"]`                   |   2.494 ms (5%) |           |   1.19 MiB (1%) |         534 |
+| `["sort", "F64 (narrow)", "ThreadsX.QuickSort"]`                   |   1.510 ms (5%) |           | 965.09 KiB (1%) |        1225 |
+| `["sort", "F64 (narrow)", "ThreadsX.StableQuickSort"]`             |   1.464 ms (5%) |           |   1.02 MiB (1%) |        1245 |
+| `["sort", "F64 (wide)", "Base"]`                                   |   5.132 ms (5%) |           |                 |             |
+| `["sort", "F64 (wide)", "ThreadsX.MergeSort"]`                     |   4.995 ms (5%) |           |   1.19 MiB (1%) |         564 |
+| `["sort", "F64 (wide)", "ThreadsX.QuickSort"]`                     |   4.984 ms (5%) |           |   1.01 MiB (1%) |        2146 |
+| `["sort", "F64 (wide)", "ThreadsX.StableQuickSort"]`               |   5.495 ms (5%) |           |   1.39 MiB (1%) |        2195 |
+| `["sort", "I64 (narrow)", "Base"]`                                 | 129.303 μs (5%) |           |  160 bytes (1%) |           1 |
+| `["sort", "I64 (narrow)", "ThreadsX.MergeSort"]`                   | 133.502 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (narrow)", "ThreadsX.QuickSort"]`                   | 133.003 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (narrow)", "ThreadsX.StableQuickSort"]`             | 133.402 μs (5%) |           |  864 bytes (1%) |          17 |
+| `["sort", "I64 (wide)", "Base"]`                                   |   5.146 ms (5%) |           |                 |             |
+| `["sort", "I64 (wide)", "ThreadsX.MergeSort"]`                     |   3.921 ms (5%) |           |   1.19 MiB (1%) |         554 |
+| `["sort", "I64 (wide)", "ThreadsX.QuickSort"]`                     |   3.785 ms (5%) |           |   1.01 MiB (1%) |        2236 |
+| `["sort", "I64 (wide)", "ThreadsX.StableQuickSort"]`               |   4.399 ms (5%) |           |   1.40 MiB (1%) |        2272 |
+| `["sort", "reversed", "Base"]`                                     | 643.811 μs (5%) |           |                 |             |
+| `["sort", "reversed", "ThreadsX.MergeSort"]`                       |   1.125 ms (5%) |           |   1.18 MiB (1%) |         435 |
+| `["sort", "reversed", "ThreadsX.QuickSort"]`                       |   1.064 ms (5%) |           | 998.75 KiB (1%) |        1871 |
+| `["sort", "reversed", "ThreadsX.StableQuickSort"]`                 |   1.458 ms (5%) |           |   1.36 MiB (1%) |        1905 |
+| `["sort", "sorted", "Base"]`                                       | 609.410 μs (5%) |           |                 |             |
+| `["sort", "sorted", "ThreadsX.MergeSort"]`                         | 821.314 μs (5%) |           |   1.18 MiB (1%) |         432 |
+| `["sort", "sorted", "ThreadsX.QuickSort"]`                         |   1.055 ms (5%) |           | 998.78 KiB (1%) |        1873 |
+| `["sort", "sorted", "ThreadsX.StableQuickSort"]`                   |   1.195 ms (5%) |           |   1.36 MiB (1%) |        1904 |
+| `["unique", "rand(1:10, 1000000)", "base"]`                        |   8.230 ms (5%) |           |  832 bytes (1%) |           8 |
+| `["unique", "rand(1:10, 1000000)", "tx"]`                          |   4.313 ms (5%) |           |  50.98 KiB (1%) |         882 |
+| `["unique", "rand(1:1000, 1000000)", "base"]`                      |   7.600 ms (5%) |           |  65.95 KiB (1%) |          27 |
+| `["unique", "rand(1:1000, 1000000)", "tx"]`                        |   4.624 ms (5%) |           |   1.07 MiB (1%) |        1186 |
+
+## Benchmark Group List
+Here's a list of all the benchmark groups executed by this job:
+
+- `["findfirst", "0%"]`
+- `["findfirst", "10%"]`
+- `["findfirst", "20%"]`
+- `["findfirst", "30%"]`
+- `["findfirst", "40%"]`
+- `["findfirst", "50%"]`
+- `["foreach", "base"]`
+- `["foreach", "broadcast"]`
+- `["foreach", "tx"]`
+- `["foreach_seq", "base"]`
+- `["foreach_seq", "tx"]`
+- `["foreach_seq_double", "cartesian"]`
+- `["foreach_seq_double", "cartesian", "tx"]`
+- `["foreach_seq_double", "linear"]`
+- `["foreach_seq_double", "linear", "tx"]`
+- `["foreach_seq_sum_many", ":nvecs => 8"]`
+- `["foreach_seq_sum_many", ":nvecs => 8", "tx"]`
+- `["sort", "F64 (narrow)"]`
+- `["sort", "F64 (wide)"]`
+- `["sort", "I64 (narrow)"]`
+- `["sort", "I64 (wide)"]`
+- `["sort", "reversed"]`
+- `["sort", "sorted"]`
+- `["unique", "rand(1:10, 1000000)"]`
+- `["unique", "rand(1:1000, 1000000)"]`
+
+## Julia versioninfo
+```
+Julia Version 1.4.2
+Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Platform Info:
+  OS: Linux (x86_64-pc-linux-gnu)
+      Ubuntu 18.04.4 LTS
+  uname: Linux 5.3.0-1031-azure #32~18.04.1-Ubuntu SMP Mon Jun 22 15:27:23 UTC 2020 x86_64 x86_64
+  CPU: Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz: 
+              speed         user         nice          sys         idle          irq
+       #1  2294 MHz      83009 s          0 s       3787 s      38654 s          0 s
+       #2  2294 MHz      75455 s          0 s       3425 s      46539 s          0 s
+       
+  Memory: 6.764884948730469 GB (2310.546875 MB free)
+  Uptime: 1275.0 sec
+  Load Avg:  1.37646484375  1.36767578125  1.05517578125
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-8.0.1 (ORCJIT, broadwell)
+```
+
+---
+# Runtime information
+| Runtime Info | |
+|:--|:--|
+| BLAS #threads | 2 |
+| `BLAS.vendor()` | `openblas64` |
+| `Sys.CPU_THREADS` | 2 |
+
+`lscpu` output:
+
+    Architecture:        x86_64
+    CPU op-mode(s):      32-bit, 64-bit
+    Byte Order:          Little Endian
+    CPU(s):              2
+    On-line CPU(s) list: 0,1
+    Thread(s) per core:  1
+    Core(s) per socket:  2
+    Socket(s):           1
+    NUMA node(s):        1
+    Vendor ID:           GenuineIntel
+    CPU family:          6
+    Model:               79
+    Model name:          Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz
+    Stepping:            1
+    CPU MHz:             2294.687
+    BogoMIPS:            4589.37
+    Hypervisor vendor:   Microsoft
+    Virtualization type: full
+    L1d cache:           32K
+    L1i cache:           32K
+    L2 cache:            256K
+    L3 cache:            51200K
+    NUMA node0 CPU(s):   0,1
+    Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single pti fsgsbase bmi1 hle avx2 smep bmi2 erms invpcid rtm rdseed adx smap xsaveopt md_clear
+    
+
+| Cpu Property       | Value                                                   |
+|:------------------ |:------------------------------------------------------- |
+| Brand              | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz               |
+| Vendor             | :Intel                                                  |
+| Architecture       | :Broadwell                                              |
+| Model              | Family: 0x06, Model: 0x4f, Stepping: 0x01, Type: 0x00   |
+| Cores              | 2 physical cores, 2 logical cores (on executing CPU)    |
+|                    | No Hyperthreading detected                              |
+| Clock Frequencies  | Not supported by CPU                                    |
+| Data Cache         | Level 1:3 : (32, 256, 51200) kbytes                     |
+|                    | 64 byte cache line size                                 |
+| Address Size       | 48 bits virtual, 44 bits physical                       |
+| SIMD               | 256 bit = 32 byte max. SIMD vector size                 |
+| Time Stamp Counter | TSC is accessible via `rdtsc`                           |
+|                    | TSC increased at every clock cycle (non-invariant TSC)  |
+| Perf. Monitoring   | Performance Monitoring Counters (PMC) are not supported |
+| Hypervisor         | Yes, Microsoft                                          |
+
